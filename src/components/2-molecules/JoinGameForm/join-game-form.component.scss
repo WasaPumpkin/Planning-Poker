@@ -1,0 +1,44 @@
+// src/components/2-molecules/JoinGameForm/join-game-form.component.scss
+.join-game-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  max-width: 400px;
+  align-items: center; // Center the button
+
+  &__field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%; // Make the group take up full width
+  }
+
+  &__role-selector {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    width: 100%; // Ensure it spans the width for alignment
+  }
+
+  &__error {
+    color: #ff8a8a;
+    font-size: 14px;
+    margin-top: -10px;
+    text-align: center;
+  }
+
+  // --- ADDED: Override styles for atoms within this form ---
+
+  // Target the Input atom
+  .custom-input {
+    // Make the input longer by setting its width to 100% of its container
+    width: 100%;
+  }
+
+  // Target the Button atom
+  .custom-button {
+    // Make the button shorter by setting a specific, smaller width
+    width: 180px;
+  }
+}

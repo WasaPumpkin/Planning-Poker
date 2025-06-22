@@ -1,0 +1,34 @@
+// src/components/1-atoms/Input/input.component.scss
+@use '../../../styles/breakpoints' as *;
+
+.custom-input--align-left {
+  text-align: left;
+}
+
+.custom-input {
+  background-color: transparent;
+  border: 1.5px solid rgba(173, 112, 255, 0.6);  
+  border-radius: 30px;
+  padding: 12px 24px;
+  color: white;
+  font-size: 16px;
+  outline: none;
+  text-align: center;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;  
+  width: 100%; 
+  box-sizing: border-box; 
+  // Use a fixed width on larger screens
+  @media (min-width: $breakpoint-tablet) {
+    width: 350px;
+  }
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  // FIX: Enhance the focus state with a brighter border and a neon glow
+  &:focus {
+    border-color: rgba(222, 207, 255, 0.9);
+    box-shadow: 0 0 10px 2px rgba(173, 112, 255, 0.25);
+  }
+}

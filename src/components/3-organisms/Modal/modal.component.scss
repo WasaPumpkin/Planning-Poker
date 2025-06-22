@@ -1,0 +1,76 @@
+// src/components/3-organisms/Modal/modal.component.scss
+@use '../../../styles/breakpoints' as *;
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(2px); 
+  box-sizing: border-box;
+}
+
+.modal-container {
+  background-color: #1a083a;
+  border-radius: 16px;  
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(173, 112, 255, 0.2);
+  width: 100%;
+  max-width: 500px;
+  border: 1px solid rgba(173, 112, 255, 0.4);
+  box-shadow: 0 0 20px 5px rgba(173, 112, 255, 0.1);
+}
+.modal-content {
+  padding: 24px;
+}
+.modal-header .custom-button--tertiary {
+  // We can target the SVG child directly here.
+  svg {
+    width: 24px;
+    height: 24px;
+    // This ensures the SVG inherits the button's color for the hover effect.
+    stroke: currentColor; 
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  
+  background-color: #5d25b5;
+  padding: 16px 24px;
+  border-bottom: 1px solid rgba(173, 112, 255, 0.2);
+  // Round the top corners to match the container
+  border-radius: 16px 16px 0 0; 
+
+  &__title {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  &__close-btn {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    padding: 4px;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: white;
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}

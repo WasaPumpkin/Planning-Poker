@@ -1,0 +1,37 @@
+// src/components/2-molecules/InvitePlayers/invite-players.component.scss
+.invite-players {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.invite-players__link-container {
+  display: flex;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 12px 16px;
+  border: 1px solid rgba(173, 112, 255, 0.4);
+  box-shadow: 0 0 10px 1px rgba(173, 112, 255, 0.15);
+}
+
+.invite-players__link-text {
+  color: rgba(255, 255, 255, 0.8);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-grow: 1;
+}
+
+// NEW: Styles for the button wrapper
+.invite-players__button-wrapper {
+  // Use flexbox to center the content inside
+  display: flex;
+  justify-content: center;
+  
+  // Target the button specifically within this component
+  .custom-button {
+    // FIX: Set the width to 50% of its parent (.button-wrapper)
+    width: 50%;
+  }
+}

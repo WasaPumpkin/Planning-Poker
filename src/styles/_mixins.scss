@@ -1,0 +1,10 @@
+// src/styles/_mixins.scss
+// This mixin holds our reusable full-page gradient style.
+@mixin full-page-gradient {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(50% 50% at 50% 50%, #330072 0%, #1F0D3F 100%);
+}

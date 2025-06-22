@@ -1,0 +1,26 @@
+// src/components/3-organisms/MainContent/main-content.component.scss
+@use '../../../styles/mixins' as *;
+
+.main-content {
+  @include full-page-gradient; // Use the mixin
+
+  color: white;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-content__header {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  &_title {
+    font-size: 24px;
+    font-weight: 500;
+  }
+}

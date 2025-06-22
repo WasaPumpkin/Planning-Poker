@@ -1,0 +1,9 @@
+//src/styles/main.scss
+@forward 'mixins';
+@forward 'breakpoints'; 
+
+// Global styles, resets, and variables.
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}

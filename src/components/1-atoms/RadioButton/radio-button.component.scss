@@ -1,0 +1,63 @@
+// src/components/1-atoms/RadioButton/radio-button.component.scss
+.radio-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 16px;
+  input:checked + &__circle {
+    border-color: rgba(222, 207, 255, 0.9);
+
+    // FIX: Replace the old box-shadow with the new, more intense one.
+    // I have corrected the typo `rgba(..., 0.` to `rgba(..., 0.15)` for a visible effect.
+    box-shadow: 0 0 15px 2px rgba(173, 112, 255, 0.3),
+      0 0 40px 10px rgba(173, 112, 255, 0.15);
+
+    // ...and show the inner dot
+    &::after {
+      transform: scale(1);
+    }
+  }
+
+  // Hide the default radio button
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+  }
+
+  // Custom radio button visual
+  &__circle {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(130, 31, 150, 0.8);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.3s ease;
+
+    // The inner dot
+    &::after {
+      content: '';
+      width: 10px;
+      height: 10px;
+      background-color: rgb(101, 32, 158);
+      border-radius: 50%;
+      transform: scale(0);
+      transition: transform 0.3s ease;
+    }
+  }
+
+  // Show the inner dot when the hidden input is checked
+  input:checked + &__circle::after {
+    transform: scale(1);
+  }
+
+  // Highlight on hover
+  &:hover .radio-button__circle {
+    border-color: white;
+  }
+}

@@ -1,0 +1,7 @@
+// src/components/4-templates/AppLayout/app-layout.component.scss
+.app-layout {
+  // FIX: Add this line.
+  // This ensures that the layout container can properly manage the
+  // positioning and z-index of the full-page components inside it.
+  position: relative;
+}

@@ -1,0 +1,50 @@
+// src/components/2-molecules/CreateGameForm/create-game-form.component.scss
+// Use @use to get access to our SASS variables
+@use '../../../styles/breakpoints' as *;
+
+.create-game-form__field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  // No special styles needed for the label anymore!
+  // It will align left by default inside this flex container.
+}
+
+.create-game-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; // This centers the input and button
+  gap: 12px; // A smaller gap might look better
+  width: 90%;
+  max-width: 450px;
+
+  // FIX: Target the label specifically and align it to the left.
+  // We use the direct child selector (>) to ensure we only affect this form's label.
+  > .custom-label {
+    width: 100%;     // Make the label take up the full width of the container
+    text-align: left; // Align the text inside the label to the left
+    padding-left: 20px; // Add some padding to align with the text inside the input
+    box-sizing: border-box;
+  }
+
+  // Now using a variable, which is much cleaner and more maintainable!
+  @media (min-width: $breakpoint-tablet) {
+    width: 100%;
+    max-width: 450px;
+  }
+
+  &__label {
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  &__error {
+    color: #ff8a8a;
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: -5px;
+    text-align: center;
+  }
+}

@@ -1,0 +1,125 @@
+// src/components/3-organisms/GameBoard/game-board.component.scss
+@use '../../../styles/mixins' as *;
+@use '../../../styles/breakpoints' as *;
+
+// --- Main Container ---
+.game-board {
+  @include full-page-gradient;
+  // Use Flexbox to create a vertical layout (header on top, main content below)
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+.game-board.blurred {
+  filter: blur(4px);
+  // Optional: Prevent interaction with the blurred background
+  pointer-events: none;
+}
+// --- Header Section ---
+.game-board__header {
+  display: flex;
+  justify-content: space-between; // This pushes children to the edges
+  align-items: center;
+  width: 100%;
+  padding: 20px; // Spacing for mobile
+  box-sizing: border-box;
+  flex-shrink: 0; // Prevents the header from shrinking
+
+  @media (min-width: $breakpoint-tablet) {
+    padding: 40px;
+  }
+}
+
+.game-board__title {
+  color: white;
+  font-size: 24px;
+  font-weight: 600;
+  // This correctly centers the title in the viewport, independent of other elements
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  @media (min-width: $breakpoint-tablet) {
+    top: 40px;
+  }
+}
+
+.game-board__header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+// --- Main Content Section ---
+.game-board__main-content {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; 
+  // FIX 1: Move the entire central area up slightly using a negative top margin.
+  // This will shift both the table and the player seat up together.
+  margin-top: -5vh; 
+}
+
+// --- Poker Table ---
+// --- Poker Table ---
+.game-board__poker-table {
+  width: 90vw;
+  height: 50vw;
+  max-width: 800px;
+  max-height: 450px;
+  // This is the 1st (outermost) border
+  border: 3px solid rgba(173, 112, 255, 0.4);
+  border-radius: 250px;
+  box-shadow: 0 0 20px 5px rgba(173, 112, 255, 0.2);
+  position: relative;
+
+  // This is the 2nd (middle) border
+  &::before {
+    content: '';
+    position: absolute;
+    // FIX: Increased inset to create a wider gap from the outer border.
+    inset: 15px; 
+    border: 2px solid rgba(222, 207, 255, 0.6);
+    // Adjust radius to match: 250px - 15px = 235px
+    border-radius: 235px; 
+  }
+
+  // This is the 3rd (innermost) border
+  &::after {
+    content: '';
+    position: absolute;
+    // FIX: Increased inset, but by a smaller amount relative to ::before,
+    // to create a narrower gap. The space between ::before (15px) and ::after (23px) is now 8px.
+    inset: 23px; 
+    border: 1px solid rgba(222, 207, 255, 0.4);
+    // Adjust radius to match: 250px - 23px = 227px
+    border-radius: 227px;
+  }
+}
+
+// --- Player Seat ---
+.game-board__player-seat-wrapper {
+  position: absolute;
+  // FIX 2: Change the positioning logic. Instead of aligning to the bottom
+  // of the container, we'll align it to the vertical center and then push it down.
+  // This makes it easier to position it relative to the centered table.
+  top: 50%; 
+  left: 50%;
+  
+  // This transform first centers the element, then pushes it down.
+  // The 'calc' function creates space below the table.
+  // We're moving it down by half the table's height (25vw) plus a gap (20px).
+  transform: translate(-50%, calc(25vw + 20px));
+
+  // A simpler alternative if the above is too complex:
+  // bottom: 5%; // Reduced from 10% to create more space from the absolute bottom
+
+  // Let's add a max-height cap to the transform for larger screens
+  @media (min-width: $breakpoint-tablet) {
+     transform: translate(-50%, calc(225px + 20px)); // 225px is half of max-height 450px
+  }
+}
