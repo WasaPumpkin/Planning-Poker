@@ -1,30 +1,41 @@
 // src/components/5-pages/JoinPage/join-page.component.tsx
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-// 1. Import Redux hooks and actions
-import { useAppDispatch } from '../../../redux/hooks';
-import { addPlayer, createGame } from '../../../redux/slices/gameSlice';
-import { type PlayerRole } from '../../2-molecules/JoinGameForm/join-game-form.component';
-
 import AppLayout from '../../4-templates/AppLayout/app-layout.component';
 import JoinGame from '../../3-organisms/JoinGame/join-game.component';
+// We only need the types from these files, not the actual Redux actions.
+import { type PlayerRole } from '../../2-molecules/JoinGameForm/join-game-form.component';
+import { type RoomState } from '../../../hooks/useRoomState';
 
 const JoinPage: React.FC = () => {
   const { gameId } = useParams<{ gameId: string }>();
   const navigate = useNavigate();
-  const dispatch = useAppDispatch(); // 2. Initialize dispatch
 
   const handleJoinSuccess = (name: string, role: PlayerRole) => {
-    // 3. Dispatch actions to update the Redux state
-    if (gameId) {
-      // Set the game name from the URL and add the new player
-      dispatch(createGame(gameId));
-      dispatch(addPlayer({ name, role }));
-    }
+    if (!gameId) return;
+    try {
+      const storedState = localStorage.getItem(gameId);
+      if (storedState) {
+        const currentRoom: RoomState = JSON.parse(storedState);
+        const updatedRoom: RoomState = {
+          ...currentRoom,
+          players: [...currentRoom.players, { name, role }],
+        };
+        localStorage.setItem(gameId, JSON.stringify(updatedRoom));
+        window.dispatchEvent(new StorageEvent('storage', { key: gameId }));
 
-    // 4. Navigate the user to the game board (which will now show the correct state)
-    // A real app might navigate to `/game/${gameId}`, but for now, home works.
-    navigate('/');
+        // --- FIX: Save BOTH the game ID and THIS USER'S name to sessionStorage ---
+        sessionStorage.setItem('activeGameId', gameId);
+        sessionStorage.setItem('currentUserName', name); // Remember who this user is
+
+        navigate('/');
+      } else {
+        alert(`Error: No se encontró la sala de juego "${gameId}".`);
+      }
+    } catch (error) {
+      console.error('Failed to join room:', error);
+      alert('Ocurrió un error al unirse a la sala.');
+    }
   };
 
   return (

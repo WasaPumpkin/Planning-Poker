@@ -30,3 +30,11 @@ export const validateGameName = (name: string): string | null => {
   // If all rules pass, the name is valid
   return null;
 };
+
+// const maxOnlyNumbers = (name, maxNumber) => {
+//     const numberMatches = name.match(/\d/g);
+//   if (numberMatches && numberMatches.length > maxNumber) {
+//     return { isValid: false, message: 'Cannot contain more than 3 numbers.' };
+//   }
+//  return { isValid: true, message: '' };
+// }

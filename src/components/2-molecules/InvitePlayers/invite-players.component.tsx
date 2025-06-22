@@ -3,9 +3,13 @@ import React, { useState } from 'react';
 import Button from '../../1-atoms/Button/button.component';
 import './invite-players.component.scss';
 
-const InvitePlayers: React.FC = () => {
+interface InvitePlayersProps {
+  gameId: string;
+}
+
+const InvitePlayers: React.FC<InvitePlayersProps> = ({ gameId }) => {
   const [buttonText, setButtonText] = useState('Copiar link');
-  const gameId = 'MyTestGame123';
+  // MODIFIED: Use the real gameId to create the link
   const inviteLink = `${window.location.origin}/${gameId}`;
 
   const handleCopyLink = async () => {
