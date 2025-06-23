@@ -1,5 +1,6 @@
 // src/components/1-atoms/VotingCard/voting-card.component.scss
 .voting-card {
+  // --- Your Base Styles (Perfect as they are) ---
   background-color: rgba(0, 0, 0, 0.2);
   border: 1.5px solid rgba(173, 112, 255, 0.5);
   border-radius: 8px;
@@ -14,21 +15,47 @@
   cursor: pointer;
   transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
 
+  // --- Base Hover Effect ---
   &:hover {
     transform: translateY(-5px);
     border-color: white;
   }
 
-  // Style for the selected card
+  // --- Style for the player's selected card in the deck (Your version) ---
   &--selected {
-    background-color: #8c52ff; // Light purple
+    background-color: #8c52ff; // Light purple from your design
     border-color: #c4a7ff;
     transform: translateY(-10px); // Raise it higher
   }
 
-  // Style for icons
+  // --- Style for when voting is over (cards in deck are disabled) ---
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    // Override the base hover effect when disabled
+    &:hover {
+      transform: none;
+      border-color: rgba(173, 112, 255, 0.5); // Revert to base border color
+    }
+  }
+
+  // --- Style for a card that is revealed on the table ---
+  &--revealed {
+    background-color: #8c52ff; // Use a consistent revealed color
+    border-color: white;
+    cursor: default;
+
+    // Override the base hover effect when revealed
+    &:hover {
+      transform: none;
+    }
+  }
+
+  // --- Style for the SVG icons ---
   .icon {
     width: 28px;
     height: 28px;
+    stroke: white; // Ensure icons are visible
   }
 }

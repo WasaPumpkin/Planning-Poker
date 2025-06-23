@@ -1,7 +1,21 @@
 // src/components/2-molecules/CardPlaceholder/card-placeholder.component.scss
+// src/components/2-molecules/CardPlaceholder/card-placeholder.component.scss
 .card-placeholder {
   width: 45px;
   height: 70px;
-  border: 1.5px solid rgba(173, 112, 255, 0.5);
+  border: 1.5px solid rgba(122, 42, 226, 0.5);
   border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+
+  &--voted {
+    .card-placeholder__vote-indicator {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(173, 112, 255, 0.5); // Purple color with some transparency
+    }
+  }
 }

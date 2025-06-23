@@ -1,0 +1,48 @@
+// src/components/2-molecules/VoteResults/vote-results.component.scss
+.vote-results {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.vote-results__cards {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.vote-results__card-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.vote-results__vote-count {
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.vote-results__average {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+
+.vote-results__average-label {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 18px;
+}
+
+.vote-results__average-value {
+  color: white;
+  font-size: 48px;
+  font-weight: 700;
+}

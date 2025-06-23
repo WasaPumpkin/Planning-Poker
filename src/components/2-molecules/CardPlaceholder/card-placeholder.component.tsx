@@ -10,7 +10,7 @@ interface CardPlaceholderProps {
 const CardPlaceholder: React.FC<CardPlaceholderProps> = ({ hasVoted }) => {
   return (
     <div className={`card-placeholder ${hasVoted ? 'card-placeholder--voted' : ''}`}>
-      {hasVoted && <div className="card-placeholder__checkmark">✓</div>}
+      {hasVoted && <div className="card-placeholder__vote-indicator"></div>}
     </div>
   );
 };
