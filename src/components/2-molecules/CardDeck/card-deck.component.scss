@@ -28,7 +28,5 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 12px;
-  
-  // --- FIX: Add this line to move the grid up ---
-  transform: translateY(-10px); // Adjust -10px to a larger or smaller value as needed
+  transform: translateY(-10px); 
 }

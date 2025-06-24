@@ -14,9 +14,7 @@ const VoteResults: React.FC<VoteResultsProps> = ({ voteCounts, average }) => {
     <div className="vote-results">
       <div className="vote-results__cards">
         {Object.entries(voteCounts).map(([value, count]) => {
-          // --- FIX 1: Use a type assertion 'as CardValue' to resolve the type error ---
-          // This tells TypeScript that we guarantee the result of this expression
-          // will be a valid CardValue.
+  
           const cardValue = (
             !isNaN(parseInt(value, 10)) ? parseInt(value, 10) : value
           ) as CardValue;

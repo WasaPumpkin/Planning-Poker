@@ -9,57 +9,51 @@
   flex-direction: column;
   position: relative;
   overflow: hidden;
+  height: 100vh;
 }
 .game-board.blurred {
-  filter: blur(4px); 
+  filter: blur(4px);
   pointer-events: none;
 }
+
 // --- Header Section ---
 .game-board__header {
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 20px; 
+  padding: 20px 40px;
   box-sizing: border-box;
-  flex-shrink: 0; 
-
-  @media (min-width: $breakpoint-tablet) {
-    padding: 40px;
-  }
+  flex-shrink: 0;
 }
-
 .game-board__title {
   color: white;
   font-size: 24px;
-  font-weight: 600; 
+  font-weight: 600;
   position: absolute;
-  top: 20px;
+  top: 40px;
   left: 50%;
   transform: translateX(-50%);
-
-  @media (min-width: $breakpoint-tablet) {
-    top: 40px;
-  }
 }
-
 .game-board__header-right {
   display: flex;
   align-items: center;
   gap: 16px;
 }
+
 // --- Main Content Section ---
 .game-board__main-content {
   flex-grow: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  // This is the "canvas" for positioning. It MUST NOT be a flex container.
   position: relative;
-  margin-top: -5vh; // Increased from -5vh to -15vh to move table up
 }
 
 // --- Poker Table ---
 .game-board__poker-table {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 90vw;
   height: 50vw;
   max-width: 600px;
@@ -67,95 +61,48 @@
   border: 3px solid rgba(173, 112, 255, 0.4);
   border-radius: 250px;
   box-shadow: 0 0 20px 5px rgba(173, 112, 255, 0.2);
-  position: relative;
-  
-  &::before {
-    content: '';
-    position: absolute;    
-    inset: 15px; 
-    border: 2px solid rgba(222, 207, 255, 0.6);   
-    border-radius: 235px; 
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1; // Table is on layer 1
 
-  &::after {
-    content: '';
-    position: absolute; 
-    inset: 23px; 
-    border: 1px solid rgba(222, 207, 255, 0.4);  
-    border-radius: 227px;
-  }
+  > * { z-index: 1; }
+  &::before, &::after { content: ''; position: absolute; z-index: 0; }
+  &::before { inset: 15px; border: 2px solid rgba(222, 207, 255, 0.6); border-radius: 235px; }
+  &::after { inset: 23px; border: 1px solid rgba(222, 207, 255, 0.4); border-radius: 227px; }
 }
 
-// --- Player Seat ---
-// --- Player Seat ---
+// --- Footer Section ---
+.game-board__footer {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  min-height: 180px;
+}
+
+// --- Player Seat Positioning (Final, Corrected Version) ---
+
+// This is the GENERIC rule for ALL seats. It reads the --x and --y variables.
 .player-seat-wrapper {
   position: absolute;
+  // Center of the screen + offset from variables
+  top: calc(50% + var(--y, 0px));
+  left: calc(50% + var(--x, 0px));
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease;
+  z-index: 2; // Seats are on layer 2, above the table
 }
 
-// Current user's seat (bottom center)
+// The SPECIFIC rules now ONLY set the --x and --y variables.
+
+// Current user is always at the bottom-center
 .player-seat-wrapper--current-user {
-  top: 51%; 
-  left: 50%;
-  transform: translate(-50%, calc(12.5vw + 20px)); // Reduced from 25vw + 30px
-
-  @media (min-width: $breakpoint-tablet) {
-    transform: translate(-50%, calc(175px + 20px)); // Reduced from 225px + 30px
-  }
+  --x: 0;
+  --y: 26vh; // 26% of viewport height down from center
+  z-index: 3; // Highlighted user is on top
 }
 
-// Positional classes for all OTHER players
-.player-seat-wrapper--other-1 {
-  // Bottom-left
-  bottom:3%; // Increased from 5%
-  left: 30%; // Increased from 20%
-  transform: translateX(-50%);
-}
-
-.player-seat-wrapper--other-2 {
-  // Left-middle
-  top: 50%;
-  left: -10%; 
-  transform: translateY(-50%);
-}
-
-.player-seat-wrapper--other-3 { //top 3
-  // Top-left
-  top: 6%; // Increased from 5%
-  left: 30%; // Increased from 20%
-  transform: translateX(-50%);
-}
-
-.player-seat-wrapper--other-4 { //top 3
-  // Top-middle
-  top: 6%;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.player-seat-wrapper--other-5 { // top 3
-  // Top-right
-  top: 6%; // Increased from 5%
-  right: 30%; // Increased from 20%
-  transform: translateX(50%);
-}
-
-.player-seat-wrapper--other-6 {
-  // Right-middle
-  top: 50%;
-  right: -10%; // Changed from -10% to positive value
-  transform: translateY(-50%);
-}
-
-.player-seat-wrapper--other-7 {
-  // Bottom-right
-  bottom: 3%; // Increased from 5%
-  right: 30%; // Increased from 20%
-  transform: translateX(50%);
-}
-
-.player-seat-wrapper--other-8 {
-  // Bottom-middle
-  bottom: 5%;
-  left: 10%;
-  transform: translateX(-50%);
-}
